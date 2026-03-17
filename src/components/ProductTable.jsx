@@ -2,11 +2,17 @@ import ProductRow from "./ProductRow";
 
 export default function ProductTable({ data, query, onSelect }) {
   return (
-    <table style={{ width: "100%", marginTop: "10px" }}>
+    <table style={{
+      width: "95%",
+      margin: "10px auto",
+      borderRadius: "10px",
+      overflow: "hidden",
+      border: "1px solid #ccc"
+    }}>
       <thead>
-        <tr>
-          <th>Código</th>
-          <th>Descrição Mercadoria</th>
+        <tr style={{ background: "#eee" }}>
+          <th style={{ padding: "10px" }}>Código</th>
+          <th style={{ padding: "10px" }}>Descrição Mercadoria</th>
         </tr>
       </thead>
       <tbody>
