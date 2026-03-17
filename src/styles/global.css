@@ -1,49 +1,4 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f5f5f5;
 }
-
-/* TOPO PRINCIPAL */
-.top-banner {
-  background: linear-gradient(to bottom, #ff6a00, #f15a00);
-  color: white;
-  padding: 12px 16px;
-  border-top: 4px solid #ffffff;
-  border-bottom: 4px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.top-banner-title {
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* SUBTÍTULO */
-.sub-banner {
-  background: #f15a00;
-  color: white;
-  padding: 8px 12px;
-  font-weight: bold;
-  border-top: 1px solid #cfcfcf;
-  border-bottom: 1px solid #cfcfcf;
-}
-
-/* BUSCA */
-.search {
-  width: 90%;
-  margin: 10px auto;
-  display: block;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-}
-
-/* TABELA */
-table {
-  width: 95%;
-  margin: 10px auto;
-  border-collapse: collapse;
-  border-radius: 10px;
-  overflow
