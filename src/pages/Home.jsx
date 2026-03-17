@@ -1,48 +1,79 @@
-return (
-  <div>
+import { useState, useEffect } from "react";
+import SearchBar from "../components/SearchBar";
+import ProductTable from "../components/ProductTable";
+import BottomSheet from "../components/BottomSheet";
+import { filterProducts } from "../utils/filterProducts";
+import { getData } from "../services/storage";
+import logo from "../assets/logo.png";
 
-    {/* TOPO LARANJA */}
-    <div className="header">
-      <span style={{ fontSize: "22px" }}>SAVEweb MOBILE</span>
-    </div>
+export default function Home({ goImport }) {
+  const [query, setQuery] = useState("");
+  const [products, setProducts] = useState([]);
+  const [selected, setSelected] = useState(null);
 
-    {/* TEXTO */}
-    <div style={{
-      background: "#f15a00",
-      color: "white",
-      padding: "8px",
-      fontWeight: "bold"
-    }}>
-      ▪ CONSULTA MERCADORIAS POR DESCRIÇÃO
-    </div>
+  useEffect(() => {
+    getData().then(setProducts);
+  }, []);
 
-    {/* BUSCA */}
-    <SearchBar query={query} setQuery={setQuery} />
+  const results = filterProducts(products, query);
 
-    {/* TABELA */}
-    <ProductTable
-      data={results}
-      query={query}
-      onSelect={setSelected}
-    />
+  return (
+    <div>
 
-    {/* DETALHE */}
-    {selected && (
-      <BottomSheet
-        product={selected}
-        onClose={() => setSelected(null)}
+      {/* TOPO COM LOGO */}
+      <div className="top-banner" style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px"
+      }}>
+        <img src={logo} alt="logo" style={{ width: "40px" }} />
+        <div className="top-banner-title">SAVEweb MOBILE</div>
+      </div>
+
+      {/* TEXTO */}
+      <div className="sub-banner">
+        ▪ CONSULTA MERCADORIAS POR DESCRIÇÃO
+      </div>
+
+      {/* BUSCA */}
+      <SearchBar query={query} setQuery={setQuery} />
+
+      {/* TABELA */}
+      <ProductTable
+        data={results}
+        query={query}
+        onSelect={setSelected}
       />
-    )}
 
-    {/* RODAPÉ */}
-    <div style={{
-      textAlign: "center",
-      marginTop: "20px",
-      color: "#0b3d2e",
-      fontWeight: "bold"
-    }}>
-      JOÃO PAULO - FILIAL 172 CASCAVEL
+      {/* DETALHE */}
+      {selected && (
+        <BottomSheet
+          product={selected}
+          onClose={() => setSelected(null)}
+        />
+      )}
+
+      {/* BOTÃO IMPORTAR */}
+      <div style={{ textAlign: "center", marginTop: "10px" }}>
+        <button
+          onClick={goImport}
+          style={{
+            background: "#f15a00",
+            color: "white",
+            border: "none",
+            padding: "10px 16px",
+            borderRadius: "10px"
+          }}
+        >
+          Importar Planilha
+        </button>
+      </div>
+
+      {/* RODAPÉ */}
+      <div className="footer-brand">
+        JOÃO PAULO - FILIAL 172 CASCAVEL
+      </div>
+
     </div>
-
-  </div>
-);
+  );
+}
