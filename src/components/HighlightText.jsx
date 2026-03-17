@@ -1,15 +1,22 @@
-export default function HighlightText({ text, query }) {
-  if (!query) return text;
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-  const parts = text.split(new RegExp(`(${query})`, "gi"));
+export default function HighlightText({ text, query }) {
+  const safeText = String(text || "");
+  const safeQuery = String(query || "").trim();
+
+  if (!safeQuery) return safeText;
+
+  const parts = safeText.split(new RegExp(`(${escapeRegExp(safeQuery)})`, "gi"));
 
   return parts.map((part, i) =>
-    part.toLowerCase() === query.toLowerCase() ? (
+    part.toLowerCase() === safeQuery.toLowerCase() ? (
       <span key={i} style={{ color: "green", fontWeight: "bold" }}>
         {part}
       </span>
     ) : (
-      part
+      <span key={i}>{part}</span>
     )
   );
 }
