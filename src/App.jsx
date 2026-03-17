@@ -7,8 +7,13 @@ export default function App() {
 
   return (
     <>
-      {page === "home" && <Home goImport={() => setPage("import")} />}
-      {page === "import" && <Import goHome={() => setPage("home")} />}
+      {page === "home" && (
+        <Home goImport={() => setPage("import")} />
+      )}
+
+      {page === "import" && (
+        <Import goHome={() => setPage("home")} />
+      )}
     </>
   );
 }
