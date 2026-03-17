@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import ProductTable from "../components/ProductTable";
 import BottomSheet from "../components/BottomSheet";
@@ -12,40 +12,42 @@ export default function Home({ goImport }) {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    getData().then(setProducts);
+    async function loadProducts() {
+      const data = await getData();
+      setProducts(data);
+    }
+
+    loadProducts();
   }, []);
 
   const results = filterProducts(products, query);
 
   return (
     <div>
-
-      {/* TOPO COM LOGO */}
-      <div className="top-banner" style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "10px"
-      }}>
-        <img src={logo} alt="logo" style={{ width: "40px" }} />
+      <div
+        className="top-banner"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px"
+        }}
+      >
+        <img src={logo} alt="Logo" style={{ width: "42px", height: "42px" }} />
         <div className="top-banner-title">SAVEweb MOBILE</div>
       </div>
 
-      {/* TEXTO */}
       <div className="sub-banner">
         ▪ CONSULTA MERCADORIAS POR DESCRIÇÃO
       </div>
 
-      {/* BUSCA */}
       <SearchBar query={query} setQuery={setQuery} />
 
-      {/* TABELA */}
       <ProductTable
         data={results}
         query={query}
         onSelect={setSelected}
       />
 
-      {/* DETALHE */}
       {selected && (
         <BottomSheet
           product={selected}
@@ -53,7 +55,6 @@ export default function Home({ goImport }) {
         />
       )}
 
-      {/* BOTÃO IMPORTAR */}
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         <button
           onClick={goImport}
@@ -69,11 +70,9 @@ export default function Home({ goImport }) {
         </button>
       </div>
 
-      {/* RODAPÉ */}
       <div className="footer-brand">
         JOÃO PAULO - FILIAL 172 CASCAVEL
       </div>
-
     </div>
   );
 }
