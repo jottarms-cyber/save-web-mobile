@@ -26,11 +26,7 @@ export default function Home({ goImport }) {
     <div>
       <div
         className="top-banner"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px"
-        }}
+        style={{ display: "flex", alignItems: "center", gap: "10px" }}
       >
         <img src={logo} alt="Logo" style={{ width: "42px", height: "42px" }} />
         <div className="top-banner-title">SAVEweb MOBILE</div>
@@ -42,11 +38,7 @@ export default function Home({ goImport }) {
 
       <SearchBar query={query} setQuery={setQuery} />
 
-      <ProductTable
-        data={results}
-        query={query}
-        onSelect={setSelected}
-      />
+      <ProductTable data={results} query={query} onSelect={setSelected} />
 
       {selected && (
         <BottomSheet
@@ -57,13 +49,13 @@ export default function Home({ goImport }) {
 
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         <button
-          onClick={goImport}
+          onClick={() => goImport()}
           style={{
             background: "#f15a00",
             color: "white",
             border: "none",
             padding: "10px 16px",
-            borderRadius: "10px"
+            borderRadius: "10px",
           }}
         >
           Importar Planilha
